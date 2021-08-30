@@ -9,6 +9,7 @@ namespace api.Entities
     public class Rating
     {
         public int Id { get; set; }
+        [Required]
         public int Rate { get; set; }
         [Required]
         public Screenplay Screenplay { get; set; }

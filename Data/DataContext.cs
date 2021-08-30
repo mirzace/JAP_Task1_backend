@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using api.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,5 +9,13 @@ namespace api.Data
 {
     public class DataContext : DbContext
     {
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+
+        }
+
+        public DbSet<Screenplay> Screenplays { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
     }
 }
