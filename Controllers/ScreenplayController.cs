@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using api.Entities;
+using api.Interfaces;
+using api.Middlewares;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,9 +10,24 @@ using System.Threading.Tasks;
 
 namespace api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ScreenplayController : ControllerBase
+    public class ScreenplayController : BaseApiController
     {
+        private readonly IScreenplayService _screenplayService;
+        public ScreenplayController(IScreenplayService screenplayService)
+        {
+            _screenplayService = screenplayService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ServerResponse<Screenplay>>> Get()
+        {
+            return Ok(await _screenplayService.GetScreenplays());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServerResponse<Screenplay>>> GetSingle(int id)
+        {
+            return Ok(await _screenplayService.GetScreenplayById(id));
+        }
     }
 }
