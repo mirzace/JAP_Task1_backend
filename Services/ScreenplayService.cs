@@ -33,9 +33,9 @@ namespace api.Services
             return response;
         }
 
-        public async Task<ServerResponse<IEnumerable<GetScreenplayDto>>> GetScreenplays(ScreenplayParams screenplayParams)
+        public async Task<ServerResponse<PagedList<GetScreenplayDto>>> GetScreenplays(ScreenplayParams screenplayParams)
         {
-            var response = new ServerResponse<IEnumerable<GetScreenplayDto>>();
+            var response = new ServerResponse<PagedList<GetScreenplayDto>>();
             response.Data = await _screenplayRepository.GetScreenplaysAsync(screenplayParams);
             return response;
         }

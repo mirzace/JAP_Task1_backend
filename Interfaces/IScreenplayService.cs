@@ -11,7 +11,7 @@ namespace api.Interfaces
 {
     public interface IScreenplayService
     {
-        Task<ServerResponse<IEnumerable<GetScreenplayDto>>> GetScreenplays(ScreenplayParams screenplayParams);
+        Task<ServerResponse<PagedList<GetScreenplayDto>>> GetScreenplays(ScreenplayParams screenplayParams);
         Task<ServerResponse<GetScreenplayDto>> GetScreenplayById(int id);
     }
 }

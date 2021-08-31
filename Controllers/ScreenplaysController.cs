@@ -1,5 +1,6 @@
 ﻿using api.DTOs;
 using api.Entities;
+using api.Extensions;
 using api.Helpers;
 using api.Interfaces;
 using api.Middlewares;
@@ -12,18 +13,23 @@ using System.Threading.Tasks;
 
 namespace api.Controllers
 {
-    public class ScreenplayController : BaseApiController
+    public class ScreenplaysController : BaseApiController
     {
         private readonly IScreenplayService _screenplayService;
-        public ScreenplayController(IScreenplayService screenplayService)
+        private readonly IScreenplayRepository _screenplayRepository;
+
+        public ScreenplaysController(IScreenplayService screenplayService)
         {
             _screenplayService = screenplayService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<ServerResponse<GetScreenplayDto>>> Get([FromQuery] ScreenplayParams screenplayParams)
+        public async Task<ActionResult<ServerResponse<IEnumerable<GetScreenplayDto>>>> Get([FromQuery] ScreenplayParams screenplayParams)
         {
-            return Ok(await _screenplayService.GetScreenplays(screenplayParams));
+            var screenplays = await _screenplayService.GetScreenplays(screenplayParams);
+            Response.AddPaginationHeader(screenplays.Data.CurrentPage, screenplays.Data.PageSize, screenplays.Data.TotalCount, screenplays.Data.TotalPages);
+            
+            return Ok(screenplays);
         }
 
         [HttpGet("{id}")]
