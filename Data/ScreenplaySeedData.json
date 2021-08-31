@@ -3,30 +3,30 @@
     "Title": "ARCHITAX",
     "Description": "Eiusmod in reprehenderit tempor commodo est eu occaecat. Mollit occaecat tempor minim ullamco ut consequat id aute qui culpa ex. Et sunt aliquip eu Lorem commodo irure. Ut enim non ut ad nisi exercitation aliquip irure labore Lorem cillum. Ullamco amet incididunt exercitation consequat amet ea velit qui culpa ex enim id ut mollit.\r\n",
     "ReleaseDate": "1988-06-30",
-    "Type": "movie"
+    "Category": "movie"
   },
   {
     "Title": "SCENTRIC",
     "Description": "Proident dolore sint quis officia laboris. Elit in ipsum in cillum cillum dolore. Ullamco et fugiat fugiat occaecat excepteur veniam Lorem nostrud culpa commodo et. Eiusmod adipisicing sit tempor cupidatat sunt sunt Lorem mollit ex Lorem id. Et ea ut voluptate consequat excepteur est proident tempor tempor. Officia aliquip ullamco officia anim sit aliquip reprehenderit culpa sint. Incididunt dolore sunt tempor magna aliqua magna.\r\n",
     "ReleaseDate": "1950-04-29",
-    "Type": "movie"
+    "Category": "movie"
   },
   {
     "Title": "GADTRON",
     "Description": "Sint laboris ut ex irure elit aliquip consectetur duis anim exercitation commodo occaecat. Voluptate qui irure consectetur magna nostrud sint duis anim laborum quis excepteur ut aliqua minim. Cupidatat ut sit eiusmod id proident adipisicing laborum aute elit Lorem. Lorem Lorem sunt elit duis. Reprehenderit consequat aute reprehenderit excepteur sit velit culpa proident amet commodo.\r\n",
     "ReleaseDate": "1984-06-27",
-    "Type": "movie"
+    "Category": "movie"
   },
   {
     "Title": "PEARLESSA",
     "Description": "Dolore sit commodo labore non et duis. Esse sunt anim quis quis nostrud. Ad sint mollit in do elit amet pariatur exercitation. Proident ipsum aliqua irure laboris magna nulla incididunt id quis consequat laboris.\r\n",
     "ReleaseDate": "1976-12-06",
-    "Type": "show"
+    "Category": "show"
   },
   {
     "Title": "IMKAN",
     "Description": "Aliqua culpa eiusmod exercitation mollit mollit. Sit ullamco officia deserunt voluptate ut Lorem cillum ex duis est. Quis enim ipsum esse esse culpa laboris in ut est tempor nulla duis. Proident pariatur adipisicing exercitation aliqua quis ullamco reprehenderit consequat nostrud fugiat irure. In sint irure sint velit labore consectetur exercitation proident eu sint eu sunt. Magna reprehenderit tempor duis sit sunt.\r\n",
     "ReleaseDate": "1978-12-27",
-    "Type": "show"
+    "Category": "show"
   }
 ]

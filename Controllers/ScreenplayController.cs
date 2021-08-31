@@ -1,4 +1,6 @@
-﻿using api.Entities;
+﻿using api.DTOs;
+using api.Entities;
+using api.Helpers;
 using api.Interfaces;
 using api.Middlewares;
 using Microsoft.AspNetCore.Http;
@@ -19,13 +21,13 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ServerResponse<Screenplay>>> Get()
+        public async Task<ActionResult<ServerResponse<GetScreenplayDto>>> Get([FromQuery] ScreenplayParams screenplayParams)
         {
-            return Ok(await _screenplayService.GetScreenplays());
+            return Ok(await _screenplayService.GetScreenplays(screenplayParams));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServerResponse<Screenplay>>> GetSingle(int id)
+        public async Task<ActionResult<ServerResponse<GetScreenplayDto>>> GetSingle(int id)
         {
             return Ok(await _screenplayService.GetScreenplayById(id));
         }

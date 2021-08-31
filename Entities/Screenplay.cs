@@ -16,5 +16,6 @@ namespace api.Entities
         public DateTime ReleaseDate { get; set; }
         public ICollection<Actor> Actors { get; set; }
         public ICollection<Rating> Ratings { get; set; }
+        public string Category { get; set; }
     }
 }

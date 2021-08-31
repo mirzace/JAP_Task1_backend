@@ -1,4 +1,6 @@
-﻿using api.Entities;
+﻿using api.DTOs;
+using api.Entities;
+using api.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace api.Interfaces
 {
     public interface IScreenplayRepository
     {
-        Task<IEnumerable<Screenplay>> GetScreenplaysAsync();
-        Task<Screenplay> GetScreenplayByIdAsync(int id);
+        Task<PagedList<GetScreenplayDto>> GetScreenplaysAsync(ScreenplayParams screenplayParams);
+        Task<GetScreenplayDto> GetScreenplayByIdAsync(int id);
     }
 }

@@ -1,4 +1,6 @@
-﻿using api.Entities;
+﻿using api.DTOs;
+using api.Entities;
+using api.Helpers;
 using api.Middlewares;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ namespace api.Interfaces
 {
     public interface IScreenplayService
     {
-        Task<ServerResponse<IEnumerable<Screenplay>>> GetScreenplays();
-        Task<ServerResponse<Screenplay>> GetScreenplayById(int id);
+        Task<ServerResponse<IEnumerable<GetScreenplayDto>>> GetScreenplays(ScreenplayParams screenplayParams);
+        Task<ServerResponse<GetScreenplayDto>> GetScreenplayById(int id);
     }
 }

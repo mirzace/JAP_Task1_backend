@@ -1,6 +1,9 @@
-﻿using api.Entities;
+﻿using api.DTOs;
+using api.Entities;
+using api.Helpers;
 using api.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,14 +21,31 @@ namespace api.Data
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Screenplay> GetScreenplayByIdAsync(int id)
+        public async Task<GetScreenplayDto> GetScreenplayByIdAsync(int id)
         {
-            return await _context.Screenplays.FindAsync(id);
+            var query = _context.Screenplays
+                 .Where(x => x.Id == id)
+                 .ProjectTo<GetScreenplayDto>(_mapper.ConfigurationProvider)
+                 .AsQueryable();
+
+            return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Screenplay>> GetScreenplaysAsync()
+        public async Task<PagedList<GetScreenplayDto>> GetScreenplaysAsync(ScreenplayParams screenplayParams)
         {
-            return await _context.Screenplays.ToListAsync();
+            var query = _context.Screenplays.AsQueryable();
+
+            query = query.Where(s => s.Category == screenplayParams.Category);
+
+            query = screenplayParams.OrderBy switch
+            {
+                "releaseDate" => query.OrderByDescending(s => s.ReleaseDate),
+                _ => query.OrderByDescending(s => s.Title)
+            };
+
+            return await PagedList<GetScreenplayDto>.CreateAsync(
+                query.ProjectTo<GetScreenplayDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                screenplayParams.PageNumber, screenplayParams.PageSize);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using api.Entities;
+﻿using api.DTOs;
+using api.Entities;
+using api.Helpers;
 using api.Interfaces;
 using api.Middlewares;
 using System;
@@ -16,9 +18,9 @@ namespace api.Services
         {
             _screenplayRepository = screenplayRepository;
         }
-        public async Task<ServerResponse<Screenplay>> GetScreenplayById(int id)
+        public async Task<ServerResponse<GetScreenplayDto>> GetScreenplayById(int id)
         {
-            var response = new ServerResponse<Screenplay>();
+            var response = new ServerResponse<GetScreenplayDto>();
             var screenplay = await _screenplayRepository.GetScreenplayByIdAsync(id);
             if(screenplay == null)
             {
@@ -31,10 +33,10 @@ namespace api.Services
             return response;
         }
 
-        public async Task<ServerResponse<IEnumerable<Screenplay>>> GetScreenplays()
+        public async Task<ServerResponse<IEnumerable<GetScreenplayDto>>> GetScreenplays(ScreenplayParams screenplayParams)
         {
-            var response = new ServerResponse<IEnumerable<Screenplay>>();
-            response.Data = await _screenplayRepository.GetScreenplaysAsync();
+            var response = new ServerResponse<IEnumerable<GetScreenplayDto>>();
+            response.Data = await _screenplayRepository.GetScreenplaysAsync(screenplayParams);
             return response;
         }
     }
