@@ -12,5 +12,7 @@ namespace api.DTOs
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Category { get; set; }
+        public ICollection<GetActorsDto> Actors { get; set; }
+        public double AverageRate { get; set; } = 0;
     }
 }

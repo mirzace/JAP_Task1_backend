@@ -91,3 +91,4 @@ C:\Users\mirzace\Desktop\Projects\Junior Acceleration Program\JAP_Task1\api\obj\
 C:\Users\mirzace\Desktop\Projects\Junior Acceleration Program\JAP_Task1\api\obj\Debug\net5.0\ref\api.dll
 C:\Users\mirzace\Desktop\Projects\Junior Acceleration Program\JAP_Task1\api\obj\Debug\net5.0\api.pdb
 C:\Users\mirzace\Desktop\Projects\Junior Acceleration Program\JAP_Task1\api\obj\Debug\net5.0\api.genruntimeconfig.cache
+C:\Users\mirzace\Desktop\Projects\Junior Acceleration Program\JAP_Task1\api\bin\Debug\net5.0\Data\ActorSeedData.json

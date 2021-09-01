@@ -12,5 +12,6 @@ namespace api.Interfaces
     {
         Task<PagedList<GetScreenplayDto>> GetScreenplaysAsync(ScreenplayParams screenplayParams);
         Task<GetScreenplayDto> GetScreenplayByIdAsync(int id);
+        Task<Screenplay> GetScreenplayAsync(int id);
     }
 }

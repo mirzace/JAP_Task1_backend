@@ -16,7 +16,6 @@ namespace api.Controllers
     public class ScreenplaysController : BaseApiController
     {
         private readonly IScreenplayService _screenplayService;
-        private readonly IScreenplayRepository _screenplayRepository;
 
         public ScreenplaysController(IScreenplayService screenplayService)
         {

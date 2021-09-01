@@ -1,5 +1,6 @@
 ﻿using api.DTOs;
 using api.Entities;
+using api.Extensions;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,10 @@ namespace api.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Screenplay, GetScreenplayDto>();
+            CreateMap<Screenplay, GetScreenplayDto>()
+                .ForMember(dest => dest.AverageRate, opt => opt.MapFrom(src => src.Ratings.CalculateRate()));
+            CreateMap<Actor, GetActorsDto>();
+            CreateMap<PostRatingDto, Rating>();
         }
     }
 }

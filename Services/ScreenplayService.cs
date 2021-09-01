@@ -3,6 +3,7 @@ using api.Entities;
 using api.Helpers;
 using api.Interfaces;
 using api.Middlewares;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace api.Services
     public class ScreenplayService : IScreenplayService
     {
         private readonly IScreenplayRepository _screenplayRepository;
+        private readonly IMapper _mapper;
 
-        public ScreenplayService(IScreenplayRepository screenplayRepository)
+        public ScreenplayService(IScreenplayRepository screenplayRepository, IMapper mapper)
         {
             _screenplayRepository = screenplayRepository;
+            _mapper = mapper;
         }
         public async Task<ServerResponse<GetScreenplayDto>> GetScreenplayById(int id)
         {
@@ -37,6 +40,7 @@ namespace api.Services
         {
             var response = new ServerResponse<PagedList<GetScreenplayDto>>();
             response.Data = await _screenplayRepository.GetScreenplaysAsync(screenplayParams);
+
             return response;
         }
     }
