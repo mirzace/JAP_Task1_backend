@@ -39,14 +39,16 @@ namespace api.Data
   
             query = query.Where(s => s.Category == screenplayParams.Category);
 
-            /*
+            if(!string.IsNullOrWhiteSpace(screenplayParams.Search))
+            {
+                query = query.Where(s => s.Description.Contains(screenplayParams.Search) || s.Title.Contains(screenplayParams.Search));
+            }
+
             query = screenplayParams.OrderBy switch
             {
+                "averageRate" => query = query.OrderByDescending(x => x.Ratings.Average(a => a.Rate)),
                 _ => query.OrderByDescending(s => s.Title)
             };
-            */
-
-            query = query.OrderByDescending(x => x.Ratings.Average(a => a.Rate));
             
             return await PagedList<GetScreenplayDto>.CreateAsync(
                 query.ProjectTo<GetScreenplayDto>(_mapper.ConfigurationProvider).AsNoTracking(),
