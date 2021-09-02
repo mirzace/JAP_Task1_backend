@@ -24,22 +24,40 @@ namespace api.Services
         public async Task<ServerResponse<GetScreenplayDto>> GetScreenplayById(int id)
         {
             var response = new ServerResponse<GetScreenplayDto>();
-            var screenplay = await _screenplayRepository.GetScreenplayByIdAsync(id);
-            if(screenplay == null)
+            try
             {
-                response.Success = false;
-                response.Message = "Screenplay not found!";
-            } else
-            {
-                response.Data = screenplay;
+                var screenplay = await _screenplayRepository.GetScreenplayByIdAsync(id);
+                if (screenplay == null)
+                {
+                    response.Success = false;
+                    response.Message = "Screenplay not found!";
+                }
+                else
+                {
+                    response.Data = screenplay;
+                }
             }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Success = false;
+            }
+            
             return response;
         }
 
         public async Task<ServerResponse<PagedList<GetScreenplayDto>>> GetScreenplays(ScreenplayParams screenplayParams)
         {
             var response = new ServerResponse<PagedList<GetScreenplayDto>>();
-            response.Data = await _screenplayRepository.GetScreenplaysAsync(screenplayParams);
+            try
+            {
+                response.Data = await _screenplayRepository.GetScreenplaysAsync(screenplayParams);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.Success = false;
+            }
 
             return response;
         }
