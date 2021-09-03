@@ -21,7 +21,10 @@ namespace api.Controllers
         [HttpPost]
         public async Task<ActionResult<ServerResponse<GetScreenplayDto>>> AddRating(PostRatingDto postRatingDto)
         {
-            return Ok(await _ratingService.AddRating(postRatingDto));
+            var response = await _ratingService.AddRating(postRatingDto);
+
+            Response.StatusCode = response.StatusCode;
+            return response;
         }
     }
 }

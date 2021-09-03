@@ -25,16 +25,28 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<ServerResponse<IEnumerable<GetScreenplayDto>>>> Get([FromQuery] ScreenplayParams screenplayParams)
         {
-            var screenplays = await _screenplayService.GetScreenplays(screenplayParams);
-            Response.AddPaginationHeader(screenplays.Data.CurrentPage, screenplays.Data.PageSize, screenplays.Data.TotalCount, screenplays.Data.TotalPages);
-            
-            return Ok(screenplays);
+            var response = await _screenplayService.GetScreenplays(screenplayParams);
+            Response.AddPaginationHeader(response.Data.CurrentPage, response.Data.PageSize, response.Data.TotalCount, response.Data.TotalPages);
+            Response.StatusCode = response.StatusCode;
+
+            switch (response.StatusCode)
+            {
+                case 200:
+                    return Ok(response);
+                case 404:
+                    return NotFound(response);
+                default:
+                    return BadRequest(response);
+            }            
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ServerResponse<GetScreenplayDto>>> GetSingle(int id)
         {
-            return Ok(await _screenplayService.GetScreenplayById(id));
+            var response = await _screenplayService.GetScreenplayById(id);
+
+            Response.StatusCode = response.StatusCode;
+            return response;
         }
     }
 }

@@ -27,21 +27,22 @@ namespace api.Services
         {
             var response = new ServerResponse<GetScreenplayDto>();
 
-            // Check if rate is between 1 and 5
-
-            if(postRatingDto.Rate < 1 || postRatingDto.Rate > 5)
-            {
-                response.Success = false;
-                response.Message = "Rate must be between 1 and 5!";
-                return response;
-            }
-
             try
             {
+                // Check if rate is between 1 and 5
+                if (postRatingDto.Rate < 1 || postRatingDto.Rate > 5)
+                {
+                    response.Success = false;
+                    response.StatusCode = 400;
+                    response.Message = "Rate must be between 1 and 5!";
+                    return response;
+                }
+
                 var screenplay = await _screenplayRepository.GetScreenplayAsync(postRatingDto.ScreenplayId);
                 if (screenplay == null)
                 {
                     response.Success = false;
+                    response.StatusCode = 404;
                     response.Message = "Screenplay not found!";
                     return response;
                 }
@@ -56,6 +57,7 @@ namespace api.Services
                 var ratedScreenplay = await _screenplayRepository.GetScreenplayByIdAsync(postRatingDto.ScreenplayId);
 
                 response.Data = _mapper.Map<GetScreenplayDto>(ratedScreenplay);
+                response.StatusCode = 201;
             }
             catch (Exception ex)
             {

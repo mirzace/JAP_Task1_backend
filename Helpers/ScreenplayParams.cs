@@ -9,6 +9,6 @@ namespace api.Helpers
     {
         public string Search { get; set; } = string.Empty;
         public string Category { get; set; } = "movie";
-        public string OrderBy { get; set; } = "Title";
+        public string OrderBy { get; set; } = "averageRate";
     }
 }

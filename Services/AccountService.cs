@@ -34,6 +34,7 @@ namespace api.Services
             {
                 if (await UserExists(registerDto.UserName)) {
                     response.Success = false;
+                    response.StatusCode = 400;
                     response.Message = "Username is taken!";
                     return response;
                 }
@@ -43,19 +44,7 @@ namespace api.Services
                 user.UserName = registerDto.UserName.ToLower();
 
                 var result = await _userManager.CreateAsync(user, registerDto.Password);
-                if (!result.Succeeded) {
-                    response.Success = false;
-                    response.Message = result.Errors.ToString();
-                    return response;
-                }
-
                 var roleResult = await _userManager.AddToRoleAsync(user, "Consumer");
-                if (!roleResult.Succeeded)
-                {
-                    response.Success = false;
-                    response.Message = roleResult.Errors.ToString();
-                    return response;
-                }
 
                 response.Data = new GetUserDto
                 {
@@ -64,11 +53,12 @@ namespace api.Services
                     FirstName = user.FirstName,
                     LastName = user.LastName
                 };
+                response.StatusCode = 201;
             }
             catch (Exception ex)
             {
                 response.Success = false;
-                response.Message = ex.Message;
+                response.Message = "Internal Server Error";
             }
 
             return response;
@@ -85,6 +75,7 @@ namespace api.Services
 
                 if (user == null) {
                     response.Success = false;
+                    response.StatusCode = 400;
                     response.Message = "Invalid Username";
                     return response;
                 }
@@ -92,6 +83,7 @@ namespace api.Services
                 var result = await _singInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
                 if (!result.Succeeded)
                 {
+                    response.StatusCode = 401;
                     response.Success = false;
                     response.Message = "Unauthorized";
                     return response;
@@ -104,6 +96,7 @@ namespace api.Services
                     FirstName = user.FirstName,
                     LastName = user.LastName
                 };
+                response.StatusCode = 200;
             }
             catch (Exception ex)
             {

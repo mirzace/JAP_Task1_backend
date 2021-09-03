@@ -9,6 +9,7 @@ namespace api.Middlewares
     {
         public T Data { get; set; }
         public bool Success { get; set; } = true;
+        public int StatusCode { get; set; } = 500;
         public string Message { get; set; } = null;
     }
 }

@@ -30,10 +30,12 @@ namespace api.Services
                 if (screenplay == null)
                 {
                     response.Success = false;
+                    response.StatusCode = 404;
                     response.Message = "Screenplay not found!";
                 }
                 else
                 {
+                    response.StatusCode = 200;
                     response.Data = screenplay;
                 }
             }
@@ -52,6 +54,13 @@ namespace api.Services
             try
             {
                 response.Data = await _screenplayRepository.GetScreenplaysAsync(screenplayParams);
+                if (response.Data.Count == 0)
+                {
+                    response.Message = "Not found";
+                    response.Success = false;
+                    response.StatusCode = 404;
+                }
+                else response.StatusCode = 200;
             }
             catch (Exception ex)
             {

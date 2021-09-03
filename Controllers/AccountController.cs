@@ -26,13 +26,19 @@ namespace api.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<ServerResponse<GetUserDto>>> Register(RegisterDto registerDto)
         {
-            return Ok(await _accountService.Register(registerDto));
+            var response = await _accountService.Register(registerDto);
+
+            Response.StatusCode = response.StatusCode;
+            return response;
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<ServerResponse<GetUserDto>>> Login(LoginDto loginDto)
         {
-            return Ok(await _accountService.Login(loginDto));
+            var response = await _accountService.Login(loginDto);
+
+            Response.StatusCode = response.StatusCode;
+            return response;
         }
     }
 }
