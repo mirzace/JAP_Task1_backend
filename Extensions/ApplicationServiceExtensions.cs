@@ -16,6 +16,8 @@ namespace api.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IRatingService, RatingService>();
             services.AddScoped<IRatingRepository, RatingRepository>();
             services.AddScoped<IScreenplayService, ScreenplayService>();

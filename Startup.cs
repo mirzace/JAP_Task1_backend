@@ -36,6 +36,7 @@ namespace api
             services.AddCors();
 
             services.AddApplicationServices(_configuration);
+            services.AddIdentityServices(_configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +60,7 @@ namespace api
                .AllowAnyMethod()
                .WithOrigins("https://localhost:4200"));
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
