@@ -17,5 +17,6 @@ namespace api.Entities
         public ICollection<Actor> Actors { get; set; }
         public ICollection<Rating> Ratings { get; set; } = null;
         public string Category { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

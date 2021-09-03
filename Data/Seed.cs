@@ -10,13 +10,6 @@ namespace api.Data
 {
     public class Seed
     {
-        /*
-        Title: '{{company()}}',
-        Description: '{{lorem(1, "paragraphs")}}',
-        ReleaseDate: '{{date(new Date(2019, 0, 1), new Date(2020,5,30), "YYYY-MM-dd")}}',
-        Category: '{{random("movie", "show")}}'
-        */
-
         public static async Task SeedScreenplays(DataContext context)
         {
             if (await context.Screenplays.AnyAsync()) return;

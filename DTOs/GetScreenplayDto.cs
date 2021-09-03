@@ -14,5 +14,6 @@ namespace api.DTOs
         public string Category { get; set; }
         public ICollection<GetActorsDto> Actors { get; set; }
         public double AverageRate { get; set; } = 0;
+        public string PhotoUrl { get; set; }
     }
 }

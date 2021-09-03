@@ -52,7 +52,7 @@ namespace api
 
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseCors(x => x.AllowAnyHeader()
