@@ -3,6 +3,7 @@ using api.Entities;
 using api.Interfaces;
 using api.Middlewares;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +40,17 @@ namespace api.Controllers
 
             Response.StatusCode = response.StatusCode;
             return response;
+        }
+
+        [Authorize(Policy = "RequireConsumerRole")]
+        [HttpGet("protected-resource")]
+        public async Task<ActionResult<ServerResponse<string>>> GetProtectedResources()
+        {
+            return Ok(new ServerResponse<string>
+            {
+                StatusCode = 200,
+                Data = "This is protected message from the server!"
+            });
         }
     }
 }
